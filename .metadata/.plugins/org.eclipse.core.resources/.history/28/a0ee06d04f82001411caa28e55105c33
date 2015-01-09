@@ -1,0 +1,46 @@
+package edu.uweo.java2.homework.networking1;
+
+import glebe.andrew.thirteen.server.Game;
+import glebe.andrew.thirteen.server.Player;
+
+import java.util.Map;
+
+
+public class PlaygroundServer implements Runnable {
+    
+    int accepttimeout;
+    int activeclients;
+    int activeconnections;
+    int clienttimeout;
+    int greeting;
+    int port;
+
+    public PlaygroundServer( Map<String, String> settings )  {
+	
+    }
+    
+    @Override
+    public void run() {
+	try {
+	    while (!Thread.currentThread().isInterrupted()) {
+		
+	    }
+	} finally {
+	    listener.close();
+	}
+    }
+    
+    public void shutdown() {
+	// TODO Auto-generated method stub
+	
+    }
+
+    public int getAccept() {
+        return accept;
+    }
+
+    public void setAccept(int accept) {
+        this.accept = accept;
+    }
+
+   

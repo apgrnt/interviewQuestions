@@ -1,0 +1,25 @@
+package edu.java2.exercise.rmi.registry;
+
+import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
+
+import edu.java2.exercise.rmi.server.HWorldServer;
+
+public class registryCreater {
+
+    public static void main(String[] args) throws InterruptedException {
+
+	try {
+	    Registry regi = LocateRegistry.createRegistry(52352);
+	    System.out.println(regi);
+	   // Thread.sleep(100000);
+	} catch (RemoteException e) {
+	    e.printStackTrace();
+	}
+	HWorldServer server = new HWorldServer();
+	server.execute();
+
+    }
+
+}

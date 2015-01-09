@@ -1,0 +1,13 @@
+package edu.uweo.java2.homework.threads;
+
+public class Tester {
+
+    public static void main(String[] args) throws InterruptedException {
+	TaskThreader threader = new TaskThreader(11);
+	threader.process();
+	System.out.println("process() method complete");
+	Thread.sleep(100);
+	TaskGenerator.initiateShutdown();
+    }
+
+}

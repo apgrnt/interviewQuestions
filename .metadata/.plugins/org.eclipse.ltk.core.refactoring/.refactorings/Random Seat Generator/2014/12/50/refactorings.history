@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Move package &apos;glebe.andrew.misc&apos; to &apos;SideProjects/src&apos;&#x0D;&#x0A;- Original project: &apos;Random Seat Generator&apos;&#x0D;&#x0A;- Destination element: &apos;SideProjects/src&apos;&#x0D;&#x0A;- Original element: &apos;Random Seat Generator/src/glebe.andrew.misc&apos;&#x0D;&#x0A;- Update references to refactored element" description="Move package" destination="=SideProjects/src" element1="/src&lt;glebe.andrew.misc" flags="589830" fragments="1" id="org.eclipse.jdt.ui.move" policy="org.eclipse.jdt.ui.movePackages" stamp="1418420553182" version="1.0"/>
+</session>

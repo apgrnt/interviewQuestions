@@ -1,0 +1,5 @@
+package edu.uweo.java2.rmi_list.server;
+
+public class ListFilter<T> {
+
+}

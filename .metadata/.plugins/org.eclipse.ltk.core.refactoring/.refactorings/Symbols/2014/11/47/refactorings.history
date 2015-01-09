@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename type &apos;edu.uweo.java2.expression_parser.Samples&apos; to &apos;Symbols&apos;&#x0D;&#x0A;- Original project: &apos;Samples&apos;&#x0D;&#x0A;- Original element: &apos;edu.uweo.java2.expression_parser.Samples&apos;&#x0D;&#x0A;- Renamed element: &apos;edu.uweo.java2.expression_parser.Symbols&apos;&#x0D;&#x0A;- Update references to refactored element&#x0D;&#x0A;- Update textual occurrences in comments and strings" description="Rename type &apos;Samples&apos;" flags="589830" id="org.eclipse.jdt.ui.rename.type" input="/src&lt;edu.uweo.java2.expression_parser{Samples.java[Samples" matchStrategy="1" name="Symbols" qualified="false" references="true" similarDeclarations="false" stamp="1416260457647" textual="false" version="1.0"/>
+</session>

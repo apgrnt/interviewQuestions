@@ -1,0 +1,49 @@
+package edu.uweo.java2.rmi_list.server;
+
+import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
+import java.rmi.server.UnicastRemoteObject;
+import java.util.Collection;
+import java.util.List;
+
+public class RMIListServer implements Runnable, RMIFilteredList {
+    
+    public RMIListServer() {
+	
+    }
+    
+    public RMIListServer(String regHost, int report) {
+	
+    }
+
+    public static void main(String[] args) {
+	if (System.getSecurityManager() == null) {
+	    System.setSecurityManager(new SecurityManager());
+	}
+	try {
+	    String name = "filter";
+	    RMIFilteredList filterEngine = new RMIListServer();
+	    RMIFilteredList stub = (RMIFilteredList) UnicastRemoteObject.exportObject(filterEngine, 0);
+	    Registry registry = LocateRegistry.getRegistry();
+	    registry.rebind(name, stub);
+	    System.out.println("filterEngine bount");
+	} catch(Exception e ){
+	    System.err.println("Filter Engine Error");
+	    e.printStackTrace();
+	}
+    }
+    
+    @Override
+    public void run() {
+	// TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public <T extends Comparable<?>> List<T> getList(Collection<T> input,
+	    ListFilter<T> filter) throws RemoteException {
+	// TODO Auto-generated method stub
+	return null;
+    }
+}

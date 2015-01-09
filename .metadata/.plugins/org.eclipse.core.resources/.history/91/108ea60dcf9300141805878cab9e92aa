@@ -1,0 +1,37 @@
+package edu.uweo.java2.homework.networking1;
+
+import java.io.IOException;
+
+public class ClientStarter {
+    
+    public static void main(String[] args) throws IOException, InterruptedException{
+      
+        Thread thr = new Thread(new Client(false));
+        
+        Thread thr1 = new Thread(new Client(false));
+        Thread thr2 = new Thread(new Client(false));
+        Thread thr3 = new Thread(new Client(false));
+        Thread thr4 = new Thread(new Client(false));
+        Thread thr5 = new Thread(new Client(true));
+        Thread thr6 = new Thread(new Client(false));
+        Thread thr7 = new Thread(new Client(false));
+        Thread thr8 = new Thread(new Client(false));
+       Thread thr9 = new Thread(new Client(true));
+        thr.start();
+        thr1.start();
+        thr2.start();
+        thr3.start();
+        thr4.start();
+        thr5.start();
+        thr6.start();
+        thr7.start();
+        thr8.start();
+        Thread.sleep(1000);
+        thr9.start();
+        
+        
+    }
+    
+    
+
+}

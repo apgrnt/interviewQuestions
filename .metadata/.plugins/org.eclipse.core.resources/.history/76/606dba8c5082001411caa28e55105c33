@@ -1,0 +1,45 @@
+package edu.uweo.java2.homework.networking1;
+
+import java.util.HashMap;
+import java.util.Map;
+
+
+public class PlaygroundServer implements Runnable {
+    
+    int acceptTimeout;
+    int activeclients;
+    int activeConnections;
+    int clientTimeout;
+    int greeting;
+    int port;
+    Map settings = new HashMap<String, String>();
+
+    public PlaygroundServer( Map<String, String> settings )  {
+	this.settings = settings;
+    }
+	
+    }
+    
+    @Override
+    public void run() {
+	try {
+	    while (!Thread.currentThread().isInterrupted()) {
+		
+	    }
+	} finally {
+	    listener.close();
+	}
+    }
+    
+    public void shutdown() {
+	// TODO Auto-generated method stub
+	
+    }
+
+   
+   
+        this.port = port;
+    }
+ }
+
+   

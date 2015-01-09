@@ -1,0 +1,23 @@
+package edu.uweo.java2.rmi_list.server;
+
+public class RMIListServer implements Runnable, RMIFilteredList {
+    
+    public RMIListServer() {
+	
+    }
+    
+    public RMIListServer(String regHost, int report) {
+	
+    }
+
+    public static void main(String[] args) {
+	// TODO Auto-generated method stub
+	
+    }
+    
+    @Override
+    public void run() {
+	// TODO Auto-generated method stub
+
+    }
+}

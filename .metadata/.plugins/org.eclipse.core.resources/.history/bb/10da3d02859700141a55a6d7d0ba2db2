@@ -1,0 +1,11 @@
+package edu.java2.exercise.rmi.registry;
+
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
+
+public class registryCreater {
+   
+    Registry regi = LocateRegistry.createRegistry(0);
+    
+
+}

@@ -1,0 +1,74 @@
+package edu.uweo.java2.homework.networking1;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.net.Socket;
+import java.net.UnknownHostException;
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.TimeUnit;
+
+
+
+public class Client implements Runnable {
+    int port = 57321;
+    String ip = "localhost";
+    
+    Socket socket;
+    PrintWriter writer;
+    BufferedReader reader;
+    private final boolean terminator;
+    private BlockingQueue<String> queue = new ArrayBlockingQueue<>(10);
+    
+    public Client(boolean terminator) throws UnknownHostException, IOException {
+	socket = new Socket(ip, port);
+	InputStreamReader streamReader = new InputStreamReader(socket.getInputStream());
+	reader = new BufferedReader(streamReader);
+	writer = new PrintWriter(socket.getOutputStream());
+	this.terminator = terminator;
+	System.out.println("Client attempted to sonnect to server");
+    }
+
+    public void run() {
+	String message;
+	
+	    try {
+		System.out.println(reader.readLine());
+		writer.println("echo first message");
+		writer.flush();
+		System.out.println(reader.readLine());
+		if(terminator) {
+		    writer.println("shutdown");
+		    writer.flush();
+		    if((message=reader.readLine()) != null) {
+			queue.put(message);
+		    }
+		    while(queue.peek() != null) {
+			System.out.println(queue.poll());
+		    }
+		} else {
+		    writer.println("goodbye");
+		    writer.flush();
+		    queue.put(reader.readLine());
+		    while(queue.peek() != null) {
+			System.out.println(queue.poll());
+		    }
+		}
+	    } catch (IOException e1) { 
+		System.err.println("Client Exception");
+		e1.printStackTrace(); 
+	    } catch (InterruptedException e) {
+		System.err.println("The Server is closed");
+		//e.printStackTrace();
+	    }
+	try {
+	    socket.close();
+	} catch (IOException e) {
+	    // TODO Auto-generated catch block
+	    e.printStackTrace();
+	} 
+	System.out.println("Client Thread: " + Thread.currentThread().getName() + " is exiting");
+    }
+}

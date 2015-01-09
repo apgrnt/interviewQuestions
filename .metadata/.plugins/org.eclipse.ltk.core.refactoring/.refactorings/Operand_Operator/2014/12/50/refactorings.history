@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Move package &apos;edu.uweo.javaintro.homework.operators&apos; to &apos;Homework/src&apos;&#x0D;&#x0A;- Original project: &apos;Operand_Operator&apos;&#x0D;&#x0A;- Destination element: &apos;Homework/src&apos;&#x0D;&#x0A;- Original element: &apos;Operand_Operator/src/edu.uweo.javaintro.homework.operators&apos;&#x0D;&#x0A;- Update references to refactored element" description="Move package" destination="=Homework/src" element1="/src&lt;edu.uweo.javaintro.homework.operators" flags="589830" fragments="1" id="org.eclipse.jdt.ui.move" policy="org.eclipse.jdt.ui.movePackages" stamp="1418419997702" version="1.0"/>
+</session>

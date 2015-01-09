@@ -1,0 +1,11 @@
+package edu.uweo.java2.homework.networking1;
+
+public class Client {
+
+    public Client(Socket socket) {
+	// TODO Auto-generated constructor stub
+    }
+    
+    
+
+}

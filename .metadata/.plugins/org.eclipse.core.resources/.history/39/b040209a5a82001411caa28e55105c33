@@ -1,0 +1,17 @@
+package edu.uweo.java2.homework.networking1;
+
+import java.util.HashMap;
+import java.util.Map;
+
+public class tester {
+    
+    public static void Main(String[] args){
+    Map<String, String> mappy = new HashMap<>();
+    PlaygroundServer server = new PlaygroundServer(mappy);
+    Thread thr = new Thread(server);
+    thr.start();
+    }
+    
+    
+
+}

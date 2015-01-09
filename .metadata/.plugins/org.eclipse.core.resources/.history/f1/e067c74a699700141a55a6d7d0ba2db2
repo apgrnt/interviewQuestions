@@ -1,0 +1,5 @@
+package edu.java2.exercise.rmi.client;
+
+public class HWorldClient {
+
+}

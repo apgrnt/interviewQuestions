@@ -1,0 +1,7 @@
+package edu.uweo.java2.rmi_list.server;
+
+import java.rmi.Remote;
+
+public interface RMIFilteredList extends Remote {
+
+}

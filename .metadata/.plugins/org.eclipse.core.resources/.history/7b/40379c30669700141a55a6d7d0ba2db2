@@ -1,0 +1,17 @@
+package edu.java2.exercise.rmi.server;
+
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
+
+public class HWorldServer {
+
+    public static void main(String[] args) {
+	
+    }
+    
+    public void execute() {
+	HWorldImpl imple = new HWorldImpl();
+	HWorldInterface stub = (HWorldInterface) UnicastRemoteObject.exportObject(imple, 0);
+    }
+
+}

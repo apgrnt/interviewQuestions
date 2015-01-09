@@ -1,0 +1,40 @@
+package glebe.andrew.thirteen.server;
+
+
+import java.net.*; 
+import java.util.*; 
+import java.io.*; 
+
+public class TestClient
+{
+
+    public static void main(String[] args)
+    { 
+        try{
+            Socket socket = new Socket("192.168.1.108", 40005); 
+            System.out.println("socket connected"); 
+            OutputStream outStream = socket.getOutputStream();
+            System.out.println("output connected"); 
+            PrintWriter output = new PrintWriter(outStream, true); 
+            System.out.println("printwriter connected"); 
+            output.println("HI Buddies -Andrew!"); 
+            output.println("HI again, this is Andrew"); 
+            
+            InputStreamReader input = new InputStreamReader(socket.getInputStream()); 
+            Scanner read = new Scanner(input); 
+            while (true && read.hasNextLine()) {
+                String line = read.nextLine(); 
+                System.out.println(line);
+            }
+        
+            output.close(); 
+            input.close(); 
+            socket.close(); 
+           
+        } catch(Exception e) {
+            System.out.println("womp womp no game for you"); 
+        }
+    }
+
+}
+

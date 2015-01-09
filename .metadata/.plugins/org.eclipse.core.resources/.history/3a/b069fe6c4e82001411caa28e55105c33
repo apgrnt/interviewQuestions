@@ -1,0 +1,29 @@
+package edu.uweo.java2.homework.networking1;
+
+import java.util.Map;
+
+
+public class PlaygroundServer implements Runnable {
+    
+    int accept-timeout;
+    int active-clients;
+    int active-connections;
+    int client-timeout;
+    int greeting;
+    int port;
+
+    public PlaygroundServer( Map<String, String> settings )  {
+	
+    }
+    
+    @Override
+    public void run() {
+	// TODO Auto-generated method stub
+	
+    }
+    
+    public void shutdown() {
+	// TODO Auto-generated method stub
+	
+    }
+}

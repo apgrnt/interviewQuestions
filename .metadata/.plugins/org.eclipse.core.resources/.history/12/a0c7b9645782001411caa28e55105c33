@@ -1,0 +1,91 @@
+package edu.uweo.java2.homework.networking1;
+
+import java.util.HashMap;
+import java.util.Map;
+
+
+public class PlaygroundServer implements Runnable {
+    
+    int acceptTimeout = 500;
+    int activeClients = 4;
+    int activeConnections = 2;
+    int clientTimeout = 500;
+    String greeting = "Welcome to the Thunderdome";
+    int port = 57001;
+    //Map<String, String> settings = new HashMap<>();
+    
+    public PlaygroundServer( Map<String, String> settings )  {
+	setAcceptTimeout(settings.get(acceptTimeout));
+	setActiveClients(settings.get(activeClients));
+	setActiveConnections(settings.get(activeConnections));
+	setClientTimeout(settings.get(clientTimeout));
+	setGreeting(settings.get(greeting));
+	setPort(settings.get(port));
+	
+    }
+    @Override
+    public void run() {
+	try {
+	    while (!Thread.currentThread().isInterrupted()) {
+		
+	    }
+	} finally {
+	}
+    }
+    public void shutdown() {
+	// TODO Auto-generated method stub
+	
+    }
+
+    public int getAcceptTimeout() {
+        return acceptTimeout;
+    }
+
+    public void setAcceptTimeout(String string) {
+        this.acceptTimeout = Integer.parseInt(string);
+    }
+
+    public int getActiveclients() {
+        return activeClients;
+    }
+
+    public void setActiveClients(String string) {
+        this.activeClients = Integer.parseInt(string);
+    }
+
+    public int getActiveConnections() {
+        return activeConnections;
+    }
+
+    public void setActiveConnections(String string) {
+        this.activeConnections = Integer.parseInt(string);
+    }
+
+    public int getClientTimeout() {
+        return clientTimeout;
+    }
+
+    public void setClientTimeout(String string) {
+        this.clientTimeout = Integer.parseInt(string);
+    }
+
+    public String getGreeting() {
+        return greeting;
+    }
+
+    public void setGreeting(String string) {
+        this.greeting = (string);
+    }
+
+    public int getPort() {
+        return port;
+    }
+
+    public void setPort(String string) {
+        this.port = Integer.parseInt(string);
+    }
+
+   
+ }
+
+   

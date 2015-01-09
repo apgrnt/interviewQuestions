@@ -1,0 +1,13 @@
+package edu.java2.exercise.rmi.server;
+
+import java.rmi.RemoteException;
+
+public class HWorldImpl implements hworld {
+
+    @Override
+    public String getComment() throws RemoteException {
+	// TODO Auto-generated method stub
+	return null;
+    }
+
+}

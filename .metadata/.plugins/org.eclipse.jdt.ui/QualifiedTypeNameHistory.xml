@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+<fullyQualifiedTypeName name="glebe.andrew.thirteen.server.Game"/>
+<fullyQualifiedTypeName name="edu.uweo.java2.expression_parser.ExpressionUtilsTest"/>
+<fullyQualifiedTypeName name="edu.uweo.java2.expression_parser.Symbols"/>
+<fullyQualifiedTypeName name="edu.uweo.java2.expression_parser.Symbols.HashKey"/>
+<fullyQualifiedTypeName name="java.awt.List"/>
+<fullyQualifiedTypeName name="java.util.ArrayList"/>
+<fullyQualifiedTypeName name="edu.uweo.java2.homework.threads.TaskGenerator"/>
+<fullyQualifiedTypeName name="java.util.concurrent.CountDownLatch"/>
+<fullyQualifiedTypeName name="java.util.Queue"/>
+<fullyQualifiedTypeName name="java.util.concurrent.PriorityBlockingQueue"/>
+<fullyQualifiedTypeName name="edu.uweo.java2.homework.networking1.ClientHandler"/>
+<fullyQualifiedTypeName name="java.net.UnknownHostException"/>
+<fullyQualifiedTypeName name="java.net.SocketException"/>
+<fullyQualifiedTypeName name="java.net.SocketTimeoutException"/>
+<fullyQualifiedTypeName name="java.util.concurrent.TimeUnit"/>
+<fullyQualifiedTypeName name="java.util.concurrent.atomic.AtomicInteger"/>
+<fullyQualifiedTypeName name="java.util.Collections"/>
+<fullyQualifiedTypeName name="java.util.List"/>
+<fullyQualifiedTypeName name="java.util.Collection"/>
+<fullyQualifiedTypeName name="java.rmi.RemoteException"/>
+<fullyQualifiedTypeName name="java.lang.SecurityManager"/>
+<fullyQualifiedTypeName name="java.rmi.server.UnicastRemoteObject"/>
+<fullyQualifiedTypeName name="java.lang.System"/>
+<fullyQualifiedTypeName name="java.rmi.registry.LocateRegistry"/>
+<fullyQualifiedTypeName name="org.omg.Messaging.SyncScopeHelper"/>
+<fullyQualifiedTypeName name="java.rmi.registry.Registry"/>
+</qualifiedTypeNameHistroy>

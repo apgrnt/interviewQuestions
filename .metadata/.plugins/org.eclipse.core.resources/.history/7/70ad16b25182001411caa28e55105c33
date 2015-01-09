@@ -1,0 +1,102 @@
+package edu.uweo.java2.homework.networking1;
+
+import java.util.HashMap;
+import java.util.Map;
+
+
+public class PlaygroundServer implements Runnable {
+    
+    int acceptTimeout;
+    int activeClients;
+    int activeConnections;
+    int clientTimeout;
+    int greeting;
+    int port;
+    Map<String, String> settings = new HashMap<>();
+    public PlaygroundServer( Map<String, String> settings )  {
+	this.settings = settings;
+	setAcceptTimeout(settings.get(acceptTimeout));
+	setActiveClients(settings.get(activeClients));
+	setActiveConnections(settings.get(activeConnections));
+	setClientTimeout(settings.get(clientTimeout));
+	setGreeting(settings.get(greeting));
+	setPort(settings.get(port));
+	
+    }
+    @Override
+    public void run() {
+	try {
+	    while (!Thread.currentThread().isInterrupted()) {
+		
+	    }
+	} finally {
+	}
+    }
+    public void shutdown() {
+	// TODO Auto-generated method stub
+	
+    }
+
+    public int getAcceptTimeout() {
+        return acceptTimeout;
+    }
+
+    public void setAcceptTimeout(String string) {
+        this.acceptTimeout = Integer.parseInt(string);
+    }
+
+    public int getActiveclients() {
+        return activeClients;
+    }
+
+    public void setActiveClients(String string) {
+        this.activeClients = Integer.parseInt(string);
+    }
+
+    public int getActiveConnections() {
+        return activeConnections;
+    }
+
+    public void setActiveConnections(int activeConnections) {
+        this.activeConnections = activeConnections;
+    }
+
+    public int getClientTimeout() {
+        return clientTimeout;
+    }
+
+    public void setClientTimeout(int clientTimeout) {
+        this.clientTimeout = clientTimeout;
+    }
+
+    public int getGreeting() {
+        return greeting;
+    }
+
+    public void setGreeting(int greeting) {
+        this.greeting = greeting;
+    }
+
+    public int getPort() {
+        return port;
+    }
+
+    public void setPort(int port) {
+        this.port = port;
+    }
+
+    public Map getSettings() {
+        return settings;
+    }
+
+    public void setSettings(Map settings) {
+        this.settings = settings;
+    }
+
+   
+   
+        this.port = port;
+    }
+ }
+
+   

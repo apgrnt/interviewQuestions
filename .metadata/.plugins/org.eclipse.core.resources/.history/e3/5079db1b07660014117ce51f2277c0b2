@@ -1,0 +1,189 @@
+package glebe.andrew.thirteen.server;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.net.Socket;
+import java.util.Arrays;
+
+public class Game {
+    
+    Player currentPlayer;
+    
+    public boolean hasWinner(){  //This Method needs to be finished. 
+	if(true)
+	    return true;
+	else
+	    return false;
+    }
+    
+    public boolean
+    
+    public boolean checkRun(Cards[] play)
+    {
+        boolean validPlay = true;
+        Arrays.sort(play);
+        for(int i = 0; i < play.length - 1;)
+        {
+            if(play[i+1].getRank() - play[i].getRank() == 1)
+                i++;
+            else
+            {
+                validPlay = false;
+                break;
+            }
+        }
+        return validPlay;
+    }
+        
+    public boolean checkSuitedRun(Cards[] play)
+    {
+        Arrays.sort(play);
+        boolean validPlay = true;
+        boolean suitCheck = true;
+        for(int i = 0; i < play.length - 1;)
+        {
+            if(play[i+1].getSuit() == play[i].getSuit())
+                i++;
+            else
+            {
+                suitCheck = false;
+                break;
+            }
+        }
+        if(!suitCheck || !checkRun(play))
+            validPlay = false;
+        return validPlay;      
+    }
+    
+    public boolean checkQuads(Cards[] play)
+    {
+        boolean validPlay = checkRank(play);
+        return validPlay;        
+    }
+    
+    public boolean checkTriple(Cards[] play)
+    {
+        boolean validPlay = checkRank(play);
+        return validPlay;
+    }
+    
+    public boolean checkPair(Cards[] play)
+    {
+        boolean validPlay = checkRank(play);
+        return validPlay;
+    }
+    
+    public boolean checkPairRun(Cards[] play)
+    {
+        boolean validPlay = true;
+        boolean pairs = true;
+        boolean run = true;
+        Arrays.sort(play);
+        for(int i = 0; i < play.length;)
+        {
+            if(play[i].getRank() == play[i+1].getRank())
+                i += 2;
+            else
+            {
+                pairs = false;
+                break;
+            }
+        }
+        for(int i = 0; i < play.length - 2;)
+        {
+            if(play[i+2].getRank() - play[i].getRank() == 1)
+                i +=2;
+            else
+            {
+                run = false;
+                break;
+            }
+        }
+        if(!pairs || !run)
+            validPlay = false;
+        return validPlay;
+    }
+    
+   /* public void lead(Cards[] play)
+    {
+    	if (play.length == 1)
+    		playSingle(play);
+    	else if(checkPair(play))
+    		playPair(play);
+    	else if(checkTriple(play))
+    		playTriple(play);
+    	else if(checkQuads(play))
+    		playQuads(play);
+    	else if(checkSuitedRun(play))
+    		playSuitedRun(play);
+    	else if(checkRun(play))
+    		playRun(play);
+    	else if(checkPairRun(play))
+    		playPairRun(play);
+    }*/
+    
+    public void follow(Cards[] play)
+    {
+    	if (play.length == 1 ){
+    	    
+    	}
+    }
+    
+    public boolean checkRank(Cards[] play)
+    {
+        boolean equalRanks = true;
+        for(int i = 0; i < play.length - 1;)
+        {
+            if(play[i+1].getRank() == play[i].getRank())
+                i++;
+            else
+            {
+                equalRanks = false;
+                break;
+            }
+        }
+        return equalRanks;
+    }
+    
+    class Player implements Runnable {
+	Socket socket;
+	int playerNumber;
+	BufferedReader input;
+	PrintWriter output;
+	
+	public void run() {
+	    try {
+		output.println("Ok, everyone is here. Let's get this bitch lit!");
+		
+		if(playerNumber == 1) {
+		    output.println("your move");
+		}
+	    }
+	    
+	}
+	
+	public Player(Socket socket, int playerNumber) {
+	    this.socket = socket;
+	    this.playerNumber = playerNumber;
+	    try {
+		input = new BufferedReader (new InputStreamReader(socket.getInputStream()) );
+		output = new PrintWriter(socket.getOutputStream());
+		output.println("Welcome Player " + playerNumber);
+		output.println("Waiting for other player to connect...");
+	    } catch(IOException e) {
+		System.out.println("oh snap, something is wrong " + e);
+	    }
+	    
+	}
+	
+	public void otherPlayerPlayed(Cards[] cards) {
+	    output.println("Someone Player" + cards);
+	    output.println(hasWinner() ? "You got owned" : "next players tunr");
+	}
+	
+    }
+    
+   
+}

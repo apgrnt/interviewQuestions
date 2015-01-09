@@ -1,0 +1,264 @@
+package edu.uweo.java2.homework.networking1;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.net.ServerSocket;
+import java.net.Socket;
+import java.net.SocketTimeoutException;
+import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicInteger;
+
+
+public class PlaygroundServer implements Runnable {
+
+    private final int acceptTimeout;
+    private final int activeClients;
+    private final int activeConnections;
+    private final int clientTimeout;
+    private final String greeting;
+    private final int port;
+    private final BlockingQueue<Socket> queue;
+    private final ClientHandler[] clientThreads;
+    private final Thread[] threads;
+    private final ServerSocket listener;
+    private Calendar cal;
+    private final AtomicBoolean activeThread = new AtomicBoolean(true);
+    private AtomicInteger clientsActive = new AtomicInteger(0);
+    private final int serverStartDate = (int) System.currentTimeMillis();
+
+    public static void main(String[] args) {
+	Map<String, String> mappy = new HashMap<>();
+	Thread thr;
+	try {
+	    mappy.put("port", "57321");
+	    thr = new Thread(new PlaygroundServer(mappy));
+	    thr.start();
+	} catch (IOException e) {
+	    e.printStackTrace();
+	    System.exit(1);
+	}
+
+    }
+
+    public PlaygroundServer(Map<String, String> settings) throws IOException {
+	if (settings.get("acceptTimeout") != null) {
+	    acceptTimeout = Integer.parseInt(settings.get("acceptTimeout"));
+	} else {
+	    acceptTimeout = 500;
+	}
+
+	if (settings.get("activeClients") != null) {
+	    activeClients = Integer.parseInt(settings.get("activeClients"));
+	} else {
+	    activeClients = 4;
+	}
+
+	if (settings.get("activeConnections") != null) {
+	    activeConnections = Integer.parseInt(settings
+		    .get("activeConnections"));
+	} else {
+	    activeConnections = 8;
+	}
+
+	if (settings.get("clientTimeout") != null) {
+	    clientTimeout = Integer.parseInt(settings.get("clientTimeout"));
+	} else {
+	    clientTimeout = 500;
+	}
+
+	if (settings.get("greeting") != null) {
+	    greeting = settings.get("greeting");
+	} else {
+	    greeting = "Welcome to the PlayGround";
+	}
+
+	if (settings.get("port") != null) {
+	    port = Integer.parseInt(settings.get("port"));
+	} else {
+	    port = 57001;
+	}
+
+	queue = new ArrayBlockingQueue<>(getActiveConnections()
+		- getActiveClients());
+	clientThreads = new ClientHandler[activeClients];
+	listener = new ServerSocket(getPort());
+	threads = new Thread[getActiveClients()];
+
+	for (int i = 0; i < clientThreads.length; i++) {
+	    clientThreads[i] = new ClientHandler(queue);
+	}
+
+	listener.setSoTimeout(10);
+    }
+
+    public void run() {
+	System.out.println(getAcceptTimeout());
+	System.out.println(getActiveClients());
+	System.out.println(getActiveConnections());
+	System.out.println(getClientTimeout());
+	System.out.println(getGreeting());
+	System.out.println(getPort());
+
+	startClients();
+	while (activeThread.get()) {
+	    pollQueue();
+	}
+	closeListener();
+    }
+ 
+    private void startClients() {
+	for (int i = 0; i < activeClients; i++) {
+	    threads[i] = new Thread(clientThreads[i]);
+	    threads[i].start();
+	}
+    }
+
+    private void pollQueue() {
+	if (queue.remainingCapacity() > 0) {
+	    try {
+		queue.put(listener.accept());
+	    } catch (InterruptedException e) {
+		e.printStackTrace();
+	    } catch (IOException e) {
+	    }
+	}
+    }
+
+    private void closeListener() {
+	try {
+	    listener.close();
+	    while (queue.peek() != null) {
+	    }
+	} catch (IOException | NullPointerException e) {
+	    e.printStackTrace();
+	}
+    }
+
+    public class ClientHandler implements Runnable {
+	private final AtomicBoolean activeClient = new AtomicBoolean(true);
+	private final BlockingQueue<Socket> que;
+	String toReturn;
+
+	public ClientHandler(BlockingQueue<Socket> queue) {
+	    que = queue;
+	}
+
+	public void run() {
+	    try {
+		while (activeThread.get() || (que.peek() != null)) {
+		    Socket clientSocket = que.poll(200, TimeUnit.MILLISECONDS);
+		    if (clientSocket != null) {
+			clientsActive.incrementAndGet();
+			popSocket(clientSocket);
+		    }
+		}
+	    } catch (Exception ex) {
+	    }
+	}
+
+	private void popSocket(Socket clientSocket) throws IOException {
+	    activeClient.set(true);
+	    String message;
+	    PrintWriter writer = new PrintWriter(clientSocket.getOutputStream());
+	    InputStreamReader isReader = new InputStreamReader(clientSocket.getInputStream());
+	    BufferedReader reader = new BufferedReader(isReader);
+	    clientSocket.setSoTimeout(100);
+
+	    if (activeThread.get()) {
+		writer.println(getGreeting());
+		writer.flush();
+	    } else {
+		writer.println("SERVER IS SHUTTING DOWN");
+		writer.flush();
+	    }
+	    try {
+		while (activeClient.get() && clientSocket.isConnected()
+			&& activeThread.get()) {
+		    try {
+			message = reader.readLine();
+			parseMessage(message);
+			writer.println(toReturn);
+			writer.flush();
+		    } catch (SocketTimeoutException e) {
+		    }
+		    if (!activeThread.get()) {
+			break;
+		    }
+		}
+	    } catch (NullPointerException e) {
+		System.err.println("Client left without saying goodbye. How rude!");
+	    }
+
+	    clientSocket.close();
+	    //System.out.println("end of client socket msg while loop~~~~~~~~~~~~~~~~~~~~~~~~~~");
+	    clientsActive.decrementAndGet();
+	}
+
+	public void parseMessage(String message) {
+	    if (!activeThread.get()) {
+		toReturn = "SERVER IS SHUTTING DOWN";
+		end();
+	    } else if (message.startsWith("time")) {
+		cal = Calendar.getInstance();
+		toReturn = Long.toString(cal.getTimeInMillis());
+	    } else if (message.startsWith("echo")) {
+		toReturn = message.substring(5);
+	    } else if (message.startsWith("ping")) {
+		toReturn = "ack";
+	    } else if (message.startsWith("clients")) {
+		toReturn = clientsActive.toString();
+	    } else if (message.startsWith("run-time")) {
+		Long end = (long) System.currentTimeMillis();
+		toReturn = Long.toString(end - serverStartDate);
+	    } else if (message.startsWith("goodbye")) {
+		toReturn = "ack, you disconnected";
+		end();
+	    } else if (message.startsWith("shutdown")) {
+		shutdown();
+		toReturn = "Ack Server Shutdown!!!!!!!!!!!!!!!!!!!!!!!";
+	    } else {
+		toReturn = "Not a valid command.... stupid";
+	    }
+	}
+
+	public void end() {
+	    activeClient.set(false);
+	}
+
+	public void shutdown() {
+	    activeThread.set(false);
+	}
+    }
+
+    public int getAcceptTimeout() {
+	return acceptTimeout;
+    }
+
+    public int getActiveClients() {
+	return activeClients;
+    }
+
+    public int getActiveConnections() {
+	return activeConnections;
+    }
+
+    public int getClientTimeout() {
+	return clientTimeout;
+    }
+
+    public String getGreeting() {
+	return greeting;
+    }
+
+    public int getPort() {
+	return port;
+    }
+}

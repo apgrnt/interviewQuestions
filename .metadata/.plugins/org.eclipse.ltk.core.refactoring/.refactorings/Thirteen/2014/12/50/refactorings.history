@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Move package &apos;glebe.andrew.thirteen.server&apos; to &apos;SideProjects/src&apos;&#x0D;&#x0A;- Original project: &apos;Thirteen&apos;&#x0D;&#x0A;- Destination element: &apos;SideProjects/src&apos;&#x0D;&#x0A;- Original element: &apos;Thirteen/glebe.andrew.thirteen.server&apos;&#x0D;&#x0A;- Update references to refactored element" description="Move package" destination="=SideProjects/src" element1="/&lt;glebe.andrew.thirteen.server" flags="589830" fragments="1" id="org.eclipse.jdt.ui.move" policy="org.eclipse.jdt.ui.movePackages" stamp="1418420178927" version="1.0"/>
+</session>

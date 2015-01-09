@@ -1,0 +1,52 @@
+package edu.uweo.java2.homework.threads;
+
+public class TaskThreader {
+    int numThreads_;
+    Thread[] threads;
+    Thread waiter = new Thread(new Waiter());
+
+    public TaskThreader(int numThreads) {
+	numThreads_ = numThreads;
+	threads = new Thread[numThreads];
+	for (int i = 0; i < numThreads; i++) {
+	    threads[i] = new Thread(new ToRun());
+	    System.out.println("New Thread Created");
+	}
+	
+    }
+
+    public void process() {
+	for (Thread t : threads) {
+	    t.start();
+	    waiter.start();
+	    System.out.println("Thread Started");
+	    
+	}
+    }
+
+    private class ToRun implements Runnable {
+	public void run() {
+	    while (!Thread.currentThread().isInterrupted()) {
+		Task t = TaskGenerator.nextTask();
+		System.out.println("Task Gotten");
+		if (!Thread.currentThread().isInterrupted()) {
+		    try {
+			System.out.println("Executing");
+			t.execute();
+
+		    } catch (IllegalTaskStateException e) {
+			e.printStackTrace();
+		    }
+		}
+		
+	    }
+	}
+    }
+    private class Waiter implements Runnable {
+	public void run() {
+	    System.out.println("Called before waitForShutown()");
+	    TaskGenerator.waitForShutdown();
+	    System.out.println("Called After waitForShutdown()");
+	}
+    }
+}

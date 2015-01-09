@@ -1,0 +1,30 @@
+package edu.java2.exercise.rmi.client;
+
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
+
+import edu.java2.exercise.rmi.server.HWorldInterface;
+
+public class HWorldClient {
+    public static void main(String[] args){
+	HWorldClient client = new HWorldClient();
+	System.out.println("HWorldClient createrd");
+	client.excecute();
+    }
+    
+    public void excecute() {
+	try {
+	    Registry registry = LocateRegistry.getRegistry("192.168.1.121", 59161);
+	    HWorldInterface remObj = (HWorldInterface) registry.lookup("rmi:Hworld");
+	    String msg = remObj.getComment();
+	    System.out.println(msg);
+	} catch (RemoteException | NotBoundException e) {
+	    System.err.println("client exception");
+	    e.printStackTrace();
+	    System.exit(1);
+	}
+    }
+
+}

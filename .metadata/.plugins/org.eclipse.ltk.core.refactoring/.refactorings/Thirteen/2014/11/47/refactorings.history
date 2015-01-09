@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename package &apos;src.glebe.andrew.thirteen.server&apos; to &apos;glebe.andrew.thirteen.server&apos;&#x0D;&#x0A;- Original project: &apos;Thirteen&apos;&#x0D;&#x0A;- Original element: &apos;Thirteen/src.glebe.andrew.thirteen.server&apos;&#x0D;&#x0A;- Renamed element: &apos;Thirteen/glebe.andrew.thirteen.server&apos;&#x0D;&#x0A;- Update references to refactored element&#x0D;&#x0A;- Update textual occurrences in comments and strings" description="Rename package &apos;src.glebe.andrew.thirteen.server&apos;" flags="589830" hierarchical="false" id="org.eclipse.jdt.ui.rename.package" input="/&lt;src.glebe.andrew.thirteen.server" name="glebe.andrew.thirteen.server" qualified="false" references="true" stamp="1416513954115" textual="false" version="1.0"/>
+</session>
