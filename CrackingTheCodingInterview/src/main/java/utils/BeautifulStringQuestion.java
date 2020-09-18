@@ -27,6 +27,8 @@ public class BeautifulStringQuestion {
         return true;
     }
 
+
+    //Stole this from StringUtils. Did this just to keep imports down for test question.
     public static String trimWhitespace(String var0) {
         if (var0 == null) {
             return var0;
