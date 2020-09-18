@@ -11,7 +11,7 @@ public class BeautifulStringQuestion {
         Map<Character, Integer> hitMap = new HashMap<>();
         String sanatizedString = trimWhitespace(inputString).toLowerCase();
         if (sanatizedString.isEmpty()) {
-            return true;
+            return true; //false seems just as likely
         }
         for (Character c : ALPHABET) {
             hitMap.put(c, 0);
