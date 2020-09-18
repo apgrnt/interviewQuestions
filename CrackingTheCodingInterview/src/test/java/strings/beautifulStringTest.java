@@ -1,16 +1,17 @@
 package strings;
 
 import org.junit.jupiter.api.Test;
+import utils.BeautifulStringQuestion;
 import utils.StringUtilsExt;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class beautifulStringTest {
-    StringUtilsExt stringUtilsExt = new StringUtilsExt();
+    BeautifulStringQuestion stringUtilsExt = new BeautifulStringQuestion();
 
     @Test
-    public void testBeautifulStringMethodExists_invalidInput() throws Exception{
+    public void testBeautifulStringMethodExists_invalidInput() {
         assertTrue(stringUtilsExt.beautifulString(""));
     }
 
